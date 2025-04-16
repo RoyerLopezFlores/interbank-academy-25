@@ -1,66 +1,61 @@
-# Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
+# Resumen del Proyecto
 
-## Objetivo:
+Este proyecto procesa un archivo CSV con transacciones financieras y genera un resumen con información clave como el balance final, la transacción de mayor monto y el conteo de transacciones por tipo (Crédito/Débito).
 
-Desarrolla una aplicación de línea de comandos (CLI) que procese un archivo CSV con transacciones bancarias y genere un reporte que incluya:
+## Instrucciones de Ejecución
 
-- **Balance Final:**  
-  Suma de los montos de las transacciones de tipo "Crédito" menos la suma de los montos de las transacciones de tipo "Débito".
+### Requisitos
 
-- **Transacción de Mayor Monto:**  
-  Identificar el ID y el monto de la transacción con el valor más alto.
+Este proyecto utiliza Python y la biblioteca pandas. Para instalar las dependencias necesarias, ejecuta:
 
-- **Conteo de Transacciones:**  
-  Número total de transacciones para cada tipo ("Crédito" y "Débito").
+```sh
+pip install pandas
+```
 
----
+### Ejecución
 
-## Instrucciones
+Para ejecutar el script, usa el siguiente comando en la terminal:
 
-1. **Repositorio Base:**  
-   Clona o haz un fork del repositorio base disponible en:  
-   `https://github.com/codeableorg/interbank-academy-25`
+```sh
+python app.py [ruta_del_archivo] [separador]
+```
 
-2. **Entrada de Datos:**  
-   La aplicación deberá leer un archivo CSV. Ejemplo de contenido:
+- `ruta_del_archivo` (opcional): Ruta del archivo CSV con los datos de las transacciones (por defecto `data.csv`).
+- `separador` (opcional): Separador de columnas en el archivo CSV (por defecto `,`).
 
-   ```
-   id,tipo,monto
-   1,Crédito,100.00
-   2,Débito,50.00
-   3,Crédito,200.00
-   4,Débito,75.00
-   5,Crédito,150.00
-   ```
+Ejemplo de ejecución:
 
-3. **Salida del Programa:**  
-   La aplicación debe mostrar el reporte final en la terminal.  
-   Ejemplo de salida:
+```sh
+python app.py transacciones.csv ;
+```
 
-   ```
-   Reporte de Transacciones
-   ---------------------------------------------
-   Balance Final: 325.00
-   Transacción de Mayor Monto: ID 3 - 200.00
-   Conteo de Transacciones: Crédito: 3 Débito: 2
-   ```
+## Enfoque y Solución
 
-4. **Lenguaje de Programación:**  
-   Utiliza el lenguaje de tu preferencia. Opciones recomendadas:
+El código implementa las siguientes funciones:
 
-   - Python
-   - Java
-   - C#
-   - JavaScript (Node.js)
+- `get_balance(data)`: Calcula el balance total de las transacciones.
+- `get_max_transaction(data)`: Encuentra la transacción con el mayor monto.
+- `get_count_transaction(data)`: Cuenta la cantidad de transacciones por tipo.
+- `show_summary(balance, transaction, counts_transactions)`: Muestra el resumen de los datos.
+- `create_summary(path_file, sep)`: Carga los datos, los procesa y genera el informe.
 
-5. **README del Proyecto:**  
-   Incluye un archivo `README.md` con la siguiente estructura:
+### Decisiones de Diseño
 
-   - **Introducción:** Breve descripción del reto y su propósito.
-   - **Instrucciones de Ejecución:** Cómo instalar dependencias y ejecutar la aplicación.
-   - **Enfoque y Solución:** Lógica implementada y decisiones de diseño.
-   - **Estructura del Proyecto:** Archivos y carpetas principales.
+- Se utilizó pandas para manejar los datos de manera eficiente.
+- Se agruparon las transacciones por tipo para calcular rápidamente el balance y conteo.
+- Se implementó `if __name__ == "__main__"` para permitir la ejecución del script desde la terminal con argumentos personalizados.
 
-6. **Documentación y Calidad del Código:**
-   - Código bien documentado y fácil de leer.
-   - Comentarios explicando pasos clave y lógica del programa.
+## Estructura del Proyecto
+
+```
+/
+│── app.py  # Script principal con la lógica del procesamiento de transacciones
+│── data.csv   # Archivo de ejemplo con transacciones
+│── README.md  # Documentación del proyecto
+```
+
+## Notas Adicionales
+
+- Asegúrate de que el archivo CSV contenga las columnas `id`, `tipo` y `monto`.
+- Puedes modificar la función `create_summary` para agregar más análisis si es necesario.
+
